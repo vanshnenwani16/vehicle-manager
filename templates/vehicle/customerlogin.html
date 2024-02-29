@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Customer Login</title>
+  <style media="screen">
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to right, #3498db, #6c5b7b, #b33939);
+    }
+
+    .card {
+      width: 400px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: 0.3s;
+      margin-bottom: 20px;
+    }
+
+    .box input[type="text"],
+    .box input[type="password"] {
+      border: 0;
+      background: #f0f0f0;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 10px 10px;
+      width: 80%;
+      outline: none;
+      color: #333;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+
+    .box h1 {
+      color: #333;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .box input[type="text"]:focus,
+    .box input[type="password"]:focus {
+      width: 90%;
+      border-color: #2ecc71;
+    }
+
+    .box input[type="submit"] {
+      border: 0;
+      background: #3498db;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 14px 40px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .box input[type="submit"]:hover {
+      background: #2ecc71;
+    }
+
+    .text-muted {
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+{% include "vehicle/navbar.html" %}
+  <div class="card">
+    <form class="box" method="post">
+      {% csrf_token %}
+      <h1>Customer Login</h1>
+      <p class="text-muted">Please enter your login and password!</p>
+
+      {% render_field form.username class="form-control" placeholder="Username" %}
+      {% render_field form.password class="form-control" placeholder="Password" %}
+
+      <input type="submit" name="" value="Login">
+    </form>
+  </div>
+</body>
+
+</html>
