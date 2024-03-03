@@ -1,6 +1,38 @@
 {% extends 'vehicle/adminbase.html' %}
 {% block content %}
+<head>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all elements with the class 'mobile-number'
+        var mobileNumbers = document.querySelectorAll('.mobile-number');
+
+        // Add click event listener to each mobile number
+        mobileNumbers.forEach(function(element) {
+            element.addEventListener('click', function() {
+                // Get the mobile number
+                var mobileNumber = element.textContent;
+
+                // Call function to open WhatsApp with pre-filled message
+                openWhatsApp(mobileNumber);
+            });
+        });
+
+        // Function to open WhatsApp with pre-filled message
+        function openWhatsApp(mobileNumber) {
+            // Construct the WhatsApp API link
+            var url = 'https://api.whatsapp.com/send?phone=' + encodeURIComponent(mobileNumber);
+
+            // Open the WhatsApp link
+            window.open(url, '_blank');
+        }
+    });
+</script>
+
+<!-- Add this script tag in your HTML template -->
+
+
+</head>
 	<!-- main content -->
 	<div class="wrapper">
 
@@ -25,7 +57,9 @@
                   <th>Problem Description</th>
                   <th>Status</th>
                   <th>Change Status</th>
+
                   <th>Delete</th>
+					<th>Mobile</th>
                 </tr>
 							</thead>
 							<tbody>
@@ -33,16 +67,24 @@
                 <tr>
 
                   <td> {{c.get_name}}</td>
-
-
                   <td> {{r.vehicle_name}}</td>
                   <td>{{r.category}}</td>
                   <td>{{r.problem_description}}</td>
                   <td>{{r.status}}</td>
 
+
                   <td><a  style="color:red; text-decoration:none;font-size:25px;" href="{% url 'change-status' r.id  %}">&#9998;</a></td>
                   <td><a style="color:blue; text-decoration:none;font-size:25px;"href="{% url 'admin-delete-request' r.id  %}">&#10008;</a></td>
+				<td>
+    <a href="https://wa.me/{{ c.mobile }}?text=Your%20vehicle%20is%20Ready!%20Thanks%20for%20using%20AutoX" target="_blank">
+        {{ c.mobile }}
+    </a>
+</td>
+
+
                 </tr>
+
+
                 {% endfor %}
 
 							</tbody>

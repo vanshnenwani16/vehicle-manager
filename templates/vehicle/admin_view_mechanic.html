@@ -18,7 +18,8 @@
 							<thead>
                 <tr>
                   <th>Name</th>
-                  <th>Profile Picture</th>
+
+                    <th>Licence</th>
                   <th>Mobile</th>
                   <th>Address</th>
                   <th>Skills</th>
@@ -31,7 +32,11 @@
               {% for m in mechanics %}
                 <tr>
                   <td> {{m.get_name}}</td>
-                  <td> <img src="{% static m.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                <td>
+    <a href="{% static m.profile_pic.url %}" download>
+        <img src="{% static m.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" />
+    </a>
+</td>
                   <td>{{m.mobile}}</td>
                   <td>{{m.address}}</td>
                   <td>{{m.skill}}</td>

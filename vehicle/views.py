@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.db.models import Q
 
+
 def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -47,6 +48,10 @@ def customer_signup_view(request):
             customer=customerForm.save(commit=False)
             customer.user=user
             customer.save()
+
+
+            # Send message using Twilio
+
             my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
             my_customer_group[0].user_set.add(user)
         return HttpResponseRedirect('customerlogin')
@@ -204,6 +209,21 @@ def admin_mechanic_view(request):
 def admin_approve_mechanic_view(request):
     mechanics=models.Mechanic.objects.all().filter(status=False)
     return render(request,'vehicle/admin_approve_mechanic.html',{'mechanics':mechanics})
+
+@login_required(login_url='adminlogin')
+def approve_mechanic_view(request,pk):
+    mechanicSalary=forms.MechanicSalaryForm()
+    if request.method=='POST':
+        mechanicSalary=forms.MechanicSalaryForm(request.POST)
+        if mechanicSalary.is_valid():
+            mechanic=models.Mechanic.objects.get(id=pk)
+            mechanic.salary=mechanicSalary.cleaned_data['salary']
+            mechanic.status=True
+            mechanic.save()
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/admin-approve-mechanic')
+    return render(request,'vehicle/admin_approve_mechanic_details.html',{'mechanicSalary':mechanicSalary})
 
 @login_required(login_url='adminlogin')
 def approve_mechanic_view(request,pk):

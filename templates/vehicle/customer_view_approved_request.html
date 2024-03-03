@@ -1,5 +1,7 @@
+
 {% extends 'vehicle/customerbase.html' %}
 {% block content %}
+{% load static %}
 
 	<!-- main content -->
 	<div class="wrapper">
@@ -23,6 +25,8 @@
                   <th>Problem Description</th>
                   <th>Enquiry Date</th>
                   <th>Status</th>
+                  <th>Mechanic Name</th>
+                  <th>Profile</th>
 
                 </tr>
 							</thead>
@@ -35,7 +39,10 @@
                   <td>{{enq.problem_description}}</td>
                   <td>{{enq.date}}</td>
                   <td>{{enq.status}}</td>
-                  
+                  <td> {{enq.mechanic}}</td>
+					<a href="{% static enq.mechanic.profile_pic.url %}" download>
+                  <td><img style="width:50px; height:50px; margin-left:01px; " src="{%static enq.mechanic.profile_pic.url%}" alt=""></td>
+					</a>
                   </tr>
                 {% endfor %}
 

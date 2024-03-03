@@ -273,6 +273,35 @@ a.socialIcon:hover,
     transition: all 0.8s;
     transition: all 0.8s
 }
+          label {
+            color: blue;
+            font-weight: bold;
+
+   /* Adjust width as needed */
+            text-align: left; /* Aligns text to the left */
+
+        }
+           .aadhar-field {
+        /* Add your styles here */
+        margin-bottom: 20px; /* Example: Add some margin to the bottom */
+    }
+
+    /* Style the input field */
+    .aadhar-field .form-control {
+        /* Add your styles here */
+     border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 350px;
+    outline: none;
+    color: #333;
+    border-radius: 24px;
+    transition: 0.25s;
+    }
 
     </style>
   </head>
@@ -294,6 +323,7 @@ a.socialIcon:hover,
                           {% render_field userForm.username class="form-control" placeholder="Username" %}
                             {% render_field userForm.password class="form-control" placeholder="Password" %}
 
+                    <label>Licence</label>
                     {% render_field mechanicForm.profile_pic class="form-control" placeholder="Profile pic" required=True%}
 
                      <input type="submit" name="" value="Create">
